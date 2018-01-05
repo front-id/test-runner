@@ -24,13 +24,24 @@ RUN apt-get update -y && apt-get install -y \
     php5-cli \
     php5-mysql \
     mysql-server \
-    mysql-client
+    mysql-client \
+    default-jdk
+
+# Install stuff to run javascript tests.
+RUN apt-get -qq -y install iceweasel > /dev/null \
+    && apt-get install xvfb -y \
+    && apt-get install openjdk-7-jre-headless -y \
+    && Xvfb :99 -ac  \
+    && export DISPLAY=:99
+
+RUN wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.0.jar \
+    &&java -jar selenium-server-standalone-2.53.0.jar > /dev/null 2>&1 &
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-# Install Drush
+# Install Drush.
 RUN export PATH="$HOME/vendor/bin:$PATH" \
   && cd $HOME \
   && composer require drush/drush
