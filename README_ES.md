@@ -5,7 +5,7 @@ Imagen de docker para ejecutar tests de behat en un entorno aislado.
 La manera recomendada para ejecutar nuestros tests de behat utilizando esta imagen es utilizar un fichero de docker-compose que nos permita copiar el contenido del fichero dentro de la imagen.
 
 En un caso de ejemplo, la estrucutura de ficheros podra ser
-
+```
 /
 - behat
 -- features
@@ -13,6 +13,7 @@ En un caso de ejemplo, la estrucutura de ficheros podra ser
 -- docker
 ---- docker-compose.yml
 - web
+```
 
 El contenido de docker compose podría ser el siguiente:
 
